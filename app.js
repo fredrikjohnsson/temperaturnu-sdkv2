@@ -6,15 +6,14 @@ const parseString = require('xml2js').parseString;
 
 const TemperatureToken = new Homey.FlowToken('Temperature', {
 	type: 'number',
-	title: 'Temperatur'
+	title: 'Temperature'
 });
-
-var Temperature;
 
 const baseApiUrl = 'http://api.temperatur.nu/tnu_1.12.php';
 
 let GetTemperatureAction = new Homey.FlowCardAction('get_temperature');
-let temperature;
+
+var ApiData;
 
 class TemperaturnuApp extends Homey.App {
 	
@@ -22,23 +21,21 @@ class TemperaturnuApp extends Homey.App {
 		this.log('temperatur.nu app is running...');
 
 		GetTemperatureAction
-		.register()
-		.registerRunListener((args, state) => {
-			this.log('GetTemperatureAction flow card executed');
-			this.UpdateDataFromApi(args.city_id, args.app_name);
-			//let apiUrl = baseApiUrl + '?p=' + args.city_id + '&verbose&cli=' + args.app_name;
-			//fetch(apiUrl)
-			//	.then(res => res.text())
-			//	.then(body => {
-			//		this.log('XML fetched, parsing..')
-			//		parseString(body, function(err, result) {
-			//			temperature = result['rss']['channel'][0]['item'][0]['temp'][0];
-			//		})
-			//		this.log('Temperature: ' + temperature);
-			//	})
-			return Promise.resolve(true);
-		});
+			.register()
+			.registerRunListener(async (args, state) => {
+				this.log('GetTemperatureAction flow card executed');
 
+				ApiData = await this.UpdateDataFromApi(args.city_id, args.app_name);
+				let temperature = ApiData.Temperature;
+						
+				this.log('ApiData temperature: ' + ApiData.Temperature);
+
+				await this.UpdateToken();
+
+				return Promise.resolve(true);
+			});
+
+		await TemperatureToken.register();
 	};
 
 	async GetData() {
@@ -53,32 +50,33 @@ class TemperaturnuApp extends Homey.App {
 
 	async UpdateToken() {
 		console.log('Updating token');
-		await TemperatureToken.setValue(Temperature.CurrentValue);
+		await TemperatureToken.setValue(ApiData.Temperature);
 	};
 
 	async UpdateDataFromApi(id, name) {
 		this.log('UpdateFromApi start (' + id + ' / ' + name + ')');
+
 		const apiResponse = await this.runFetchOperation(id, name);
 		let temperature = await this.apiReturnTemperature(apiResponse);
-		this.log('Temperature fetched from API: ' + temperature);
+		
+		this.log('UpdateFromApi complete');
+
 		return {
-			CurrentValue: 0
+			Temperature: temperature
 		};
 	}
 	
 	async runFetchOperation(id, name) {
 		this.log('runFetchOperation start (' + id + ' / ' + name + ')');
 		let apiUrl = baseApiUrl + '?p=' + id + '&verbose&cli=' + name;
-		let apiResult;
-		const response = await fetch(apiUrl)
-			.then(res => res.text())
-			.then(body => {
-				apiResult = body
-			});
+		
+		const response = await fetch(apiUrl);
+
 		this.log('runFetchOperation complete');
 
 		if (response.ok) {
-			return await apiResult;
+			this.log('Response is OK');
+			return await response.text();
 		}
 		
 		throw Error('Failed to get data from API: ${id} / ${name}, response code: ${response.status}');
@@ -86,10 +84,14 @@ class TemperaturnuApp extends Homey.App {
 
 	async apiReturnTemperature(xml) {
 		this.log('apiReturnTemperature start');
+
 		await parseString(xml, function(err, result) {
-			return result['rss']['channel'][0]['item'][0]['temp'][0];
+			temperature = result['rss']['channel'][0]['item'][0]['temp'][0];
 		});
+
 		this.log('apiReturnTemperature complete');
+
+		return temperature;
 	}
 	
 }
