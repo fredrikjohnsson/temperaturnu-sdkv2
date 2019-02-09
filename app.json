@@ -1,0 +1,50 @@
+{
+  "id": "se.fredrikjohnsson.temperaturnu",
+  "version": "0.0.1",
+  "compatibility": ">=1.5.0",
+  "sdk": 2,
+  "name": {
+    "en": "temperatur.nu"
+  },
+  "description": {
+    "en": "Adds support for temperatures from temperatur.nu"
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Fredrik Johnsson",
+    "email": "contact@fredrikjohnsson.se"
+  },
+  "flow": {
+    "actions": [
+      {
+        "id": "get_temperature",
+        "title": {
+          "en": "Get temperature"
+        },
+        "args": [
+          {
+            "type": "text",
+            "name": "city_id",
+            "placeholder": {
+              "en": "City id"
+            }
+          },
+          {
+            "type": "text",
+            "name": "app_name",
+            "placeholder": {
+              "en": "App name"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
