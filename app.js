@@ -14,8 +14,6 @@ const TimestampToken = new Homey.FlowToken('Timestamp', {
 	title: 'Timestamp'
 });
 
-const Settings = Homey.ManagerSettings;
-
 const baseApiUrl = 'http://api.temperatur.nu/tnu_1.12.php';
 
 var ApiData;
@@ -27,18 +25,16 @@ class TemperaturnuApp extends Homey.App {
 	async onInit() {
 		this.log('temperatur.nu app is running...');
 
-		this.log(Settings.get('appname'));
+		this.log('Appname: ' + Homey.ManagerSettings.get('appname'));
 
 		GetDataAction
 			.register()
 			.registerRunListener(async (args, state) => {
 				this.log('GetDataAction flow card executed');	
 				
-				ApiData = await this.UpdateDataFromApi(args.city_id, Settings.get('appname'));					
-				
-				this.log('ApiData temperature: ' + ApiData.Temperature);
-				this.log('ApiData timestamp: ' + ApiData.Timestamp);
-				
+				//if (!Homey.ManagerSettings.get('appname')) return Promise.resolve(false);
+				ApiData = await this.UpdateDataFromApi(args.city_id, Homey.ManagerSettings.get('appname'));					
+								
 				await this.UpdateTokens();
 				return Promise.resolve(true);
 			});
@@ -48,19 +44,20 @@ class TemperaturnuApp extends Homey.App {
 	};
 
 	async UpdateTokens() {
-		this.log('UpdatingTokens start');
+		this.log('UpdateTokens start');
 		await TemperatureToken.setValue(ApiData.Temperature);
-		await TimestampToken.setValue(ApiData.Timestamp);
-		this.log('UpdateingTokens complete')
+		//await TimestampToken.setValue(ApiData.Timestamp);
+		this.log('UpdateTokens complete')
 	};
 
 	async UpdateDataFromApi(id, name) {
 		this.log('UpdateFromApi start (' + id + ' / ' + name + ')');
 
 		let apiResponse = await this.runFetchOperation(id, name);
-		let temperature = await this.apiReturnValue(apiResponse, 'temp');
+		let temperature = await parseInt(this.apiReturnValue(apiResponse, 'temp'));
 		let timestamp = await this.apiReturnValue(apiResponse, 'lastUpdate');
 		this.log('UpdateFromApi temperature: ' + temperature);
+		this.log('typeof: ' + typeof(temperature));
 		this.log('UpdateFromApi timestamp: ' + timestamp);
 		this.log('UpdateFromApi complete');
 
