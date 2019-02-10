@@ -11,9 +11,9 @@ const TemperatureToken = new Homey.FlowToken('Temperature', {
 
 const baseApiUrl = 'http://api.temperatur.nu/tnu_1.12.php';
 
-let GetTemperatureAction = new Homey.FlowCardAction('get_temperature');
-
 var ApiData;
+
+let GetTemperatureAction = new Homey.FlowCardAction('get_temperature');
 
 class TemperaturnuApp extends Homey.App {
 	
@@ -23,32 +23,19 @@ class TemperaturnuApp extends Homey.App {
 		GetTemperatureAction
 			.register()
 			.registerRunListener(async (args, state) => {
-				this.log('GetTemperatureAction flow card executed');
-
-				ApiData = await this.UpdateDataFromApi(args.city_id, args.app_name);
-				let temperature = ApiData.Temperature;
-						
+				this.log('GetTemperatureAction flow card executed');	
+				ApiData = await this.UpdateDataFromApi(args.city_id, args.app_name);					
+				//TODO: Next line will not be executed. Problem with ApiData object?
 				this.log('ApiData temperature: ' + ApiData.Temperature);
-
-				await this.UpdateToken();
-
+				
+				await this.UpdateTokens();
 				return Promise.resolve(true);
 			});
 
 		await TemperatureToken.register();
 	};
 
-	async GetData() {
-		try {
-			console.log('Async GetData start');
-			Temperature = await this.UpdateDataFromApi();
-			console.log('Async GetData complete');
-		} catch(e) {
-			console.error('Error in GetData: ' + e);
-		}
-	};
-
-	async UpdateToken() {
+	async UpdateTokens() {
 		console.log('Updating token');
 		await TemperatureToken.setValue(ApiData.Temperature);
 	};
@@ -75,7 +62,7 @@ class TemperaturnuApp extends Homey.App {
 		this.log('runFetchOperation complete');
 
 		if (response.ok) {
-			this.log('Response is OK');
+			this.log('runFetchOperation response is OK');
 			return await response.text();
 		}
 		
@@ -86,7 +73,7 @@ class TemperaturnuApp extends Homey.App {
 		this.log('apiReturnTemperature start');
 
 		await parseString(xml, function(err, result) {
-			temperature = result['rss']['channel'][0]['item'][0]['temp'][0];
+			let temperature = result['rss']['channel'][0]['item'][0]['temp'][0];
 		});
 
 		this.log('apiReturnTemperature complete');
