@@ -9,47 +9,64 @@ const TemperatureToken = new Homey.FlowToken('Temperature', {
 	title: 'Temperature'
 });
 
+const TimestampToken = new Homey.FlowToken('Timestamp', {
+	type: 'string',
+	title: 'Timestamp'
+});
+
+const Settings = Homey.ManagerSettings;
+
 const baseApiUrl = 'http://api.temperatur.nu/tnu_1.12.php';
 
 var ApiData;
 
-let GetTemperatureAction = new Homey.FlowCardAction('get_temperature');
+let GetDataAction = new Homey.FlowCardAction('get_temperature');
 
 class TemperaturnuApp extends Homey.App {
 	
 	async onInit() {
 		this.log('temperatur.nu app is running...');
 
-		GetTemperatureAction
+		this.log(Settings.get('appname'));
+
+		GetDataAction
 			.register()
 			.registerRunListener(async (args, state) => {
-				this.log('GetTemperatureAction flow card executed');	
-				ApiData = await this.UpdateDataFromApi(args.city_id, args.app_name);					
-				//TODO: Next line will not be executed. Problem with ApiData object?
+				this.log('GetDataAction flow card executed');	
+				
+				ApiData = await this.UpdateDataFromApi(args.city_id, Settings.get('appname'));					
+				
 				this.log('ApiData temperature: ' + ApiData.Temperature);
+				this.log('ApiData timestamp: ' + ApiData.Timestamp);
 				
 				await this.UpdateTokens();
 				return Promise.resolve(true);
 			});
 
 		await TemperatureToken.register();
+		await TimestampToken.register();
 	};
 
 	async UpdateTokens() {
-		console.log('Updating token');
+		this.log('UpdatingTokens start');
 		await TemperatureToken.setValue(ApiData.Temperature);
+		await TimestampToken.setValue(ApiData.Timestamp);
+		this.log('UpdateingTokens complete')
 	};
 
 	async UpdateDataFromApi(id, name) {
 		this.log('UpdateFromApi start (' + id + ' / ' + name + ')');
 
-		const apiResponse = await this.runFetchOperation(id, name);
-		let temperature = await this.apiReturnTemperature(apiResponse);
-		
+		let apiResponse = await this.runFetchOperation(id, name);
+		let temperature = await this.apiReturnValue(apiResponse, 'temp');
+		let timestamp = await this.apiReturnValue(apiResponse, 'lastUpdate');
+		this.log('UpdateFromApi temperature: ' + temperature);
+		this.log('UpdateFromApi timestamp: ' + timestamp);
 		this.log('UpdateFromApi complete');
 
 		return {
-			Temperature: temperature
+			Temperature: temperature,
+			Timestamp: timestamp
 		};
 	}
 	
@@ -69,16 +86,17 @@ class TemperaturnuApp extends Homey.App {
 		throw Error('Failed to get data from API: ${id} / ${name}, response code: ${response.status}');
 	}
 
-	async apiReturnTemperature(xml) {
-		this.log('apiReturnTemperature start');
+	apiReturnValue(xml, property) {
+		this.log('apiReturnValue start');
 
-		await parseString(xml, function(err, result) {
-			let temperature = result['rss']['channel'][0]['item'][0]['temp'][0];
+		let output;
+		parseString(xml, function(err, result) {
+			output = result.rss.channel[0].item[0][property][0];
 		});
 
-		this.log('apiReturnTemperature complete');
+		this.log('apiReturnValue complete with result: ' + output);
 
-		return temperature;
+		return output;
 	}
 	
 }

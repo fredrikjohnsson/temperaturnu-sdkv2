@@ -35,13 +35,6 @@
             "placeholder": {
               "en": "City id"
             }
-          },
-          {
-            "type": "text",
-            "name": "app_name",
-            "placeholder": {
-              "en": "App name"
-            }
           }
         ]
       }

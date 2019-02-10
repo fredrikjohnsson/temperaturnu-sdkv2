@@ -1,1 +1,6 @@
-{}
+{
+    "settings": {
+        "title": "temperature.nu settings",
+        "subtitle": "Use an app name for unsigned calls to temperatur.nu API. Number of unsigned calls is limited to 20 per hour."
+    }
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+      </head>
+      <body>
+        <h1 data-i18n="settings.title"></h1>
+        <p data-i18n="settings.subtitle"></p>
+
+        <fieldset>
+            <legend>temperatur.nu settings</legend>
+
+            <div class="field_row">
+                <label for="appname">App name</label>
+                <input id="appname" type="text" value="" />
+            </div>
+        </fieldset>
+
+        <button id="save" class="right">Save changes</button>
+
+        <script type="text/javascript">
+            function onHomeyReady( Homey ){            
+                Homey.ready();
+
+                var appnameElement = document.getElementById('appname');
+                var saveElement = document.getElementById('save');
+
+                Homey.get('appname', function(err, appname) {
+                    if (err) return Homey.alert(err);
+                    appnameElement.value = appname;
+                });
+
+                saveElement.addEventListener('click', function(e) {
+                    Homey.set('appname', appnameElement.value, function(err) {
+                        if (err) return Homey.alert(err);
+                    });
+                });
+            }
+            </script>
+      </body>
+</html>
