@@ -54,7 +54,7 @@ class TemperaturnuApp extends Homey.App {
 		this.log('UpdateFromApi start (' + id + ' / ' + name + ')');
 
 		let apiResponse = await this.runFetchOperation(id, name);
-		let temperature = await parseInt(this.apiReturnValue(apiResponse, 'temp'));
+		let temperature = await parseFloat(this.apiReturnValue(apiResponse, 'temp'));
 		let timestamp = await this.apiReturnValue(apiResponse, 'lastUpdate');
 		this.log('UpdateFromApi temperature: ' + temperature);
 		this.log('typeof: ' + typeof(temperature));
