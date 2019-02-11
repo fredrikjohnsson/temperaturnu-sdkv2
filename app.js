@@ -32,7 +32,7 @@ class TemperaturnuApp extends Homey.App {
 			.registerRunListener(async (args, state) => {
 				this.log('GetDataAction flow card executed');	
 				
-				//if (!Homey.ManagerSettings.get('appname')) return Promise.resolve(false);
+				if (!Homey.ManagerSettings.get('appname')) return Promise.resolve(false);
 				ApiData = await this.UpdateDataFromApi(args.city_id, Homey.ManagerSettings.get('appname'));					
 								
 				await this.UpdateTokens();
@@ -46,7 +46,7 @@ class TemperaturnuApp extends Homey.App {
 	async UpdateTokens() {
 		this.log('UpdateTokens start');
 		await TemperatureToken.setValue(ApiData.Temperature);
-		//await TimestampToken.setValue(ApiData.Timestamp);
+		await TimestampToken.setValue(ApiData.Timestamp);
 		this.log('UpdateTokens complete')
 	};
 
@@ -57,7 +57,6 @@ class TemperaturnuApp extends Homey.App {
 		let temperature = await parseFloat(this.apiReturnValue(apiResponse, 'temp'));
 		let timestamp = await this.apiReturnValue(apiResponse, 'lastUpdate');
 		this.log('UpdateFromApi temperature: ' + temperature);
-		this.log('typeof: ' + typeof(temperature));
 		this.log('UpdateFromApi timestamp: ' + timestamp);
 		this.log('UpdateFromApi complete');
 
