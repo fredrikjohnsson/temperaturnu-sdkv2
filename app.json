@@ -21,41 +21,6 @@
     "name": "Fredrik Johnsson",
     "email": "contact@fredrikjohnsson.se"
   },
-  "flow": {
-    "triggers": [
-      {
-        "id": "temperature_changed",
-        "title": {
-          "en": "Temperature device changed"
-        },
-        "tokens": [
-          {
-            "name": "temperature",
-            "title": {
-              "en": "Temperature"
-            }
-          }
-        ]
-      }
-    ],
-    "actions": [
-      {
-        "id": "get_temperature",
-        "title": {
-          "en": "Get temperature"
-        },
-        "args": [
-          {
-            "type": "text",
-            "name": "city_id",
-            "placeholder": {
-              "en": "City id"
-            }
-          }
-        ]
-      }
-    ]
-  },
   "drivers": [
     {
       "id": "temperature",

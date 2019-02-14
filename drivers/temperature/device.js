@@ -9,9 +9,6 @@ class TemperatureDevice extends Homey.Device {
 	onInit() {
 		this.log('TemperatureDevice has been inited');
 		
-		let thisTemperatureChanged = new Homey.FlowCardTrigger('temperature_changed');
-		thisTemperatureChanged.register();
-		
 		const POLL_INTERVAL = 300000;	// 5 minutes
 
 		this.pollTemperature();
@@ -28,10 +25,13 @@ class TemperatureDevice extends Homey.Device {
 
 	async pollTemperature() {
 		this.log('pollTemperature start');
-		if (Homey.ManagerSettings.get('appname') != null) {
+
+		const stationId = this.getSetting('stationid');
+		const appName = Homey.ManagerSettings.get('appname');
+
+		if (appName != null && (stationId != undefined && stationId != null)) {
+			this.log('pollTemperature: All settings OK');
 			const baseUrl = 'http://api.temperatur.nu/tnu_1.12.php';
-			const stationId = this.getSetting('stationid');
-			const appName = Homey.ManagerSettings.get('appname');
 			const url = baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
 			
 			const response = await fetch(url);
