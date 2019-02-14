@@ -22,6 +22,22 @@
     "email": "contact@fredrikjohnsson.se"
   },
   "flow": {
+    "triggers": [
+      {
+        "id": "temperature_changed",
+        "title": {
+          "en": "Temperature device changed"
+        },
+        "tokens": [
+          {
+            "name": "temperature",
+            "title": {
+              "en": "Temperature"
+            }
+          }
+        ]
+      }
+    ],
     "actions": [
       {
         "id": "get_temperature",
@@ -39,5 +55,46 @@
         ]
       }
     ]
-  }
+  },
+  "drivers": [
+    {
+      "id": "temperature",
+      "name": {
+        "en": "Temperature"
+      },
+      "class": "sensor",
+      "capabilities": ["measure_temperature"],
+      "images": {
+        "large": "/drivers/temperature/assets/images/large.png",
+        "small": "/drivers/temperature/assets/images/small.png"
+      },
+      "pair": [{
+        "id": "list_devices",
+        "template": "list_devices",
+        "navigation": {
+          "next": "add_devices"
+        }
+      },
+      {
+        "id": "add_devices",
+        "template": "add_devices"
+      }],
+      "settings": [{
+        "type": "group",
+        "label": {
+          "en": "Device settings"
+        },
+        "children": [{
+          "id": "stationid",
+          "type": "text",
+          "label": {
+            "en": "Station ID"
+          },
+          "hint": {
+            "en": "Go to temperatur.nu and search for your station. Station ID is the last part of the URL without '.html'. For example, the station ID for URL https://temperatur.nu/evenas.html is 'evenas'."
+          }
+        }]
+      }]
+    }
+  ]
 }
