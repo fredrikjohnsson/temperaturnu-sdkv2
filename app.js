@@ -9,9 +9,9 @@ class TemperaturnuApp extends Homey.App {
 
 		if (!Homey.ManagerSettings.get('appname')) {
 			// App name is not set, generate a name
-			const appName = 'HomeyApp' + Math.floor(Math.random() * 90000) + 10000;
+			const appName = 'HomeyApp' + (Math.floor(Math.random() * 90000) + 10000);
 			Homey.ManagerSettings.set('appname', appName);
-			this.log('App name ' + appName + 'generated');
+			this.log('App name ' + appName + ' generated');
 		}
 	}
 }
