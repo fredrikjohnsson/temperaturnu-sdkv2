@@ -2,7 +2,7 @@
 
 const Homey = require('homey');
 
-var devices = [];
+let devices = [];
 
 class TemperatureDriver extends Homey.Driver {
 	
@@ -14,7 +14,7 @@ class TemperatureDriver extends Homey.Driver {
 	onPair(socket) {
 		this.log('onPair start');
 
-		var myData;
+		let myData;
 		
 		socket.on('log', function(msg, callback) {
 			console.log('log: ' + msg);
@@ -26,21 +26,17 @@ class TemperatureDriver extends Homey.Driver {
 		});
 
 		socket.on('list_devices', function(data, callback) {
-			console.log('list_devices start');
-			var devices = [];
-
-			var device = {
-				name: 'Temperature',
-				data: {
-					id: guid(),
+			if (devices.length == 0) {
+				let device = {
+					name: 'Temperature',
+					data: {
+						id: guid(),
+					}
 				}
+				devices.push(device);
+				callback(null, devices);
 			}
-			devices.push(device);
-			
-			callback(null, devices);
 		});
-
-		
 	}
 	
 }
