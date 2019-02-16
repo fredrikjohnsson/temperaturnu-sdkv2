@@ -3,8 +3,9 @@
 const Homey = require('homey');
 const fetch = require('node-fetch');
 const parseString = require('xml2js').parseString;
+const crypto = require('crypto');
 
-const baseUrl = 'http://api.temperatur.nu/tnu_1.12.php';
+const baseUrl = 'api.temperatur.nu/tnu_1.15.php';
 const appName = Homey.ManagerSettings.get('appname');
 
 class TemperatureDevice extends Homey.Device {
@@ -38,7 +39,9 @@ class TemperatureDevice extends Homey.Device {
 		this.log('stationid: ' + stationId );
 		if (appName != null && stationId != null) {
 			this.log('fetchData: All settings OK');
-			const url = baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
+			const url = 'http://' + baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
+			const signedUrl = url + '&sign=' + this.createHash(url);
+			this.log('SIGNED URL: ' + signedUrl);
 
 			const response = await fetch(url);
 
@@ -63,6 +66,10 @@ class TemperatureDevice extends Homey.Device {
 			this.log('Settings not OK');
 			return null;
 		}
+	}
+
+	async createHash(text) {
+		return crypto.createHash('md5').update(text).digest('base64');
 	}
 
 	async fetchTemperature() {
