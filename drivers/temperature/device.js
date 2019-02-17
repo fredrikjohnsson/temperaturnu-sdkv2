@@ -35,60 +35,74 @@ class TemperatureDevice extends Homey.Device {
 	}
 
 	async fetchData(stationId, appName) {
-		this.log('fetchData start');
-		this.log('stationid: ' + stationId );
+		this.log('[fetchData] Start');
+
 		if (appName != null && stationId != null) {
-			this.log('fetchData: All settings OK');
-			const url = 'http://' + baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
-			const signedUrl = url + '&sign=' + this.createHash(url);
-			this.log('SIGNED URL: ' + signedUrl);
+			this.log('[fetchData] All settings OK');
+			// Build URL without http://, prepare for md5 hash
+			const url = baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
 
-			const response = await fetch(url);
+			// Create a signed URL with client key
+			const hash = await this.createHash(url + '+' + Homey.env.CLIENT_KEY);
+			const signedUrl = 'http://' + url + '&sign=' + hash;
 
+			// Make API call
+			let response;
+			if (Homey.env.CLIENT_KEY != '') {
+				this.log('[fetchData] Fetching data using signed URL')
+				response = await fetch(signedUrl);
+			} else {
+				this.log('[fetchData] Fetching data using unsigned URL')
+				response = await fetch('http://' + url);
+			}
+			
+			// Take care of not ok responses
 			if (!response.ok) {
-				this.log('fetchData: Response not OK from API, no data returned');
+				this.log('[fetchData] Response not OK from API, no data returned');
 				return null
 			}
 
 			const xml = await response.text();
 			
+			// Check if maximum calls have been reached
 			let title;
 			parseString(xml, function(err, result) {
 				title = result.rss.channel[0].item[0].title[0];
 			});
 
+			// Return XML if not max API calls have been reached
 			if (title.substr(0, 14) != 'Please Upgrade!') {
 				return xml;
 			} else {
 				return null;
 			}
 		} else {
-			this.log('Settings not OK');
+			this.log('[fetchData] Settings not OK');
 			return null;
 		}
 	}
 
 	async createHash(text) {
-		return crypto.createHash('md5').update(text).digest('base64');
+		return await crypto.createHash('md5').update(text).digest('base64');
 	}
 
 	async fetchTemperature() {
 		const stationId = this.getSetting('stationid');
 		const xml = await this.fetchData(stationId, appName);
 		const value = await this.xmlValue(xml, 'temp');
-		this.saveTemperature(parseFloat(value));
+		await this.saveTemperature(parseFloat(value));
 	}
 
 	async saveTemperature(temperature) {
-		this.log('saveTemperature start');
+		this.log('[saveTemperature] Start');
 
 		const varType = typeof(temperature);
 		if (varType != 'number' || isNaN(temperature)) {
-			this.log('saveTemperature: Variable is not of type number or temperature is NaN');
+			this.log('[saveTemperature] Variable is not of type number or temperature is NaN');
 			return Promise.resolve(false);
 		}
 		
-		this.log('saveTemperature: Setting temperature to ' + temperature);
+		this.log('[saveTemperature] Setting temperature to ' + temperature);
 		this.setCapabilityValue('measure_temperature', temperature);
 
 		return Promise.resolve(true);
@@ -105,47 +119,6 @@ class TemperatureDevice extends Homey.Device {
 			return null;
 		}
 	}
-
-	// async pollTemperatureOld() {
-	// 	this.log('pollTemperature start');
-
-	// 	const stationId = this.getSetting('stationid');
-	// 	const appName = Homey.ManagerSettings.get('appname');
-
-	// 	if (appName != null && (stationId != undefined && stationId != null)) {
-	// 		this.log('pollTemperature: All settings OK');
-	// 		const baseUrl = 'http://api.temperatur.nu/tnu_1.12.php';
-	// 		const url = baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
-			
-	// 		const response = await fetch(url);
-			
-	// 		if (!response.ok) {
-	// 			this.log('pollTempterature: Response not OK from API, returning false');
-	// 			return Promise.resolve(false);
-	// 		}
-
-	// 		const xml = await response.text();
-			
-	// 		let temperature;
-	// 		parseString(xml, function(err, result) {
-	// 			let title = result.rss.channel[0].item[0].title[0];
-	// 			if (title.substr(0, 14) != 'Please Upgrade!') {
-	// 				temperature = parseFloat(result.rss.channel[0].item[0].temp[0]);
-	// 			}
-	// 		});
-			
-	// 		if (!temperature) {
-	// 			this.log('pollTemperature: Temperature not set, returning false');
-	// 			return Promise.resolve(false);
-	// 		}
-
-	// 		this.log('pollTemperature: ' + temperature);
-	// 		this.setCapabilityValue('measure_temperature', temperature);
-
-	// 		return Promise.resolve();
-	// 	}
-	// }
-	
 }
 
 module.exports = TemperatureDevice;

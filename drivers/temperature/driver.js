@@ -12,20 +12,22 @@ class TemperatureDriver extends Homey.Driver {
 	}
 
 	onPair(socket) {
-		this.log('onPair start');
+		this.log('[onPair] start');
+		const t = this;
 
 		let myData;
 		
 		socket.on('log', function(msg, callback) {
-			console.log('log: ' + msg);
+			t.log('[onPair] [log] ' + msg);
 		});
 
 		socket.on('start', function(data, callback) {
 			myData = data;
-			console.log('start: ' + data);
+			t.log('[onPair] [start] ' + data);
 		});
 
 		socket.on('list_devices', function(data, callback) {
+			t.log('[onPair] [list_devies] Start')
 			if (devices.length == 0) {
 				let device = {
 					name: 'Temperature',
