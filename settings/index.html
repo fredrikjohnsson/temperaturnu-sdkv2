@@ -1,41 +1,47 @@
 <!doctype html>
-<html>
+<html">
     <head>
         <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
-      </head>
-      <body>
-        <h1 data-i18n="settings.title"></h1>
-        <p data-i18n="settings.subtitle"></p>
+    </head>
+    <style>
+        .image {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+<body>
+    <img src="assets/temperaturnu.gif" alt="temperatur.nu" class="image"/>
+    <fieldset>
+        <legend>temperatur.nu app settings</legend>
+        <div class="field_row">
+            <label for="appname">App name</label>
+            <input id="appname" type="text" value="" />
+        </div>
+        <button id="saveAppName" class="right">Save</button>
+    </fieldset>
+    
+    <script type="text/javascript">
+        function onHomeyReady(Homey){            
+            Homey.ready();
 
-        <fieldset>
-            <legend>temperatur.nu settings</legend>
+            // Declare page elements
+            var appnameElement = document.getElementById('appname');
+            var saveAppNameElement = document.getElementById('saveAppName');
 
-            <div class="field_row">
-                <label for="appname">App name</label>
-                <input id="appname" type="text" value="" />
-            </div>
-        </fieldset>
+            // Get saved values and fill inputs
+            Homey.get('appname', function(err, appname) {
+                if (err) return Homey.alert(err);
+                appnameElement.value = appname;
+            });
 
-        <button id="save" class="right">Save changes</button>
-
-        <script type="text/javascript">
-            function onHomeyReady( Homey ){            
-                Homey.ready();
-
-                var appnameElement = document.getElementById('appname');
-                var saveElement = document.getElementById('save');
-
-                Homey.get('appname', function(err, appname) {
+            // Listen for button clicks
+            saveAppNameElement.addEventListener('click', function(e) {
+                Homey.set('appname', appnameElement.value, function(err) {
                     if (err) return Homey.alert(err);
-                    appnameElement.value = appname;
                 });
+            });
+        }
+    </script>
 
-                saveElement.addEventListener('click', function(e) {
-                    Homey.set('appname', appnameElement.value, function(err) {
-                        if (err) return Homey.alert(err);
-                    });
-                });
-            }
-            </script>
-      </body>
+</body>
 </html>
