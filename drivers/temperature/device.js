@@ -6,13 +6,12 @@ const parseString = require('xml2js').parseString;
 const crypto = require('crypto');
 
 const baseUrl = 'api.temperatur.nu/tnu_1.15.php';
-const appName = Homey.ManagerSettings.get('appname');
 
 class TemperatureDevice extends Homey.Device {
-	
+
 	async onInit() {
 		this.log('TemperatureDevice has been inited');
-		
+
 		const POLL_INTERVAL = 300000;	// 5 minutes
 
 		this.fetchTemperature();
@@ -55,7 +54,7 @@ class TemperatureDevice extends Homey.Device {
 				this.log('[fetchData] Fetching data using unsigned URL')
 				response = await fetch('http://' + url);
 			}
-			
+
 			// Take care of not ok responses
 			if (!response.ok) {
 				this.log('[fetchData] Response not OK from API, no data returned');
@@ -63,7 +62,7 @@ class TemperatureDevice extends Homey.Device {
 			}
 
 			const xml = await response.text();
-			
+
 			// Check if maximum calls have been reached
 			let title;
 			parseString(xml, function(err, result) {
@@ -87,6 +86,7 @@ class TemperatureDevice extends Homey.Device {
 	}
 
 	async fetchTemperature() {
+		const appName = Homey.ManagerSettings.get('appname');
 		const stationId = this.getSetting('stationid');
 		const xml = await this.fetchData(stationId, appName);
 		const value = await this.xmlValue(xml, 'temp');
@@ -101,7 +101,7 @@ class TemperatureDevice extends Homey.Device {
 			this.log('[saveTemperature] Variable is not of type number or temperature is NaN');
 			return Promise.resolve(false);
 		}
-		
+
 		this.log('[saveTemperature] Setting temperature to ' + temperature);
 		this.setCapabilityValue('measure_temperature', temperature);
 
