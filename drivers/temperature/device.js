@@ -16,6 +16,8 @@ class TemperatureDevice extends Homey.Device {
 
 		this.fetchTemperature();
 		this._fetchTemperature = setInterval(this.fetchTemperature.bind(this), POLL_INTERVAL);
+
+		this._temperatureUpdatedTrigger = this.getDriver().temperatureUpdatedTrigger;
 	}
 
 	onAdded(){
@@ -104,6 +106,7 @@ class TemperatureDevice extends Homey.Device {
 
 		this.log('[saveTemperature] Setting temperature to ' + temperature);
 		this.setCapabilityValue('measure_temperature', temperature);
+		this._temperatureUpdatedTrigger.trigger(this, null, this.device_data);
 
 		return Promise.resolve(true);
 	}

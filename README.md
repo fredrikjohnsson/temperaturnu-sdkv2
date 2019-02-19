@@ -14,12 +14,16 @@ At the moment only one trigger is available, *The temperature has changed*. In t
 
 ### ToDo
 - [ ] Add app icon
-- [ ] Add *The temperature is updated* flow trigger
+- [x] Add *The temperature is updated* flow trigger
 - [ ] Get temperature from API when station ID is changed
 
 ### Known issues
 - After entering a station ID for a device, the value returned from API is NaN. After five minutes a good value is returned.
 
 ### Changelog
-- v0.0.2: Rebuilt app to get data to a device
-- v0.0.1: First version, getting values from API with a flow action card
+**v0.0.3**
+- Added *The temperature is updated* flow trigger card
+**v0.0.2**
+- Rebuilt app to get data to a device
+**v0.0.1**
+- First version, getting values from API with a flow action card
