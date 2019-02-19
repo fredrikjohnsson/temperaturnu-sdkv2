@@ -12,7 +12,7 @@ After a temperature device is created, go to app settings and then Advanced sett
 
 At the moment only one trigger is available, *The temperature has changed*. In the future, *The temperature is updated* will be added to be able to trigger every five minutes, when the API is called.
 
-### ToDO
+### ToDo
 - [ ] Add app icon
 - [ ] Add *The temperature is updated* flow trigger
 - [ ] Get temperature from API when station ID is changed
