@@ -21,6 +21,8 @@ At the moment only one trigger is available, *The temperature has changed*. In t
 - After entering a station ID for a device, the value returned from API is NaN. After five minutes a good value is returned.
 
 ### Changelog
+- **v0.0.4**
+  - Prepared for translation of the app
 - **v0.0.3**
   - Added *The temperature is updated* flow trigger card
 - **v0.0.2**
