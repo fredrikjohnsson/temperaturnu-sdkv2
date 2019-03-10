@@ -13,19 +13,20 @@
 <body>
   <img src="assets/temperaturnu.gif" alt="temperatur.nu" class="image"/>
   <fieldset>
-    <legend>temperatur.nu app settings</legend>
+    <legend data-i18n="settings.title"></legend>
     <div class="field_row">
-      <label for="appname">App name</label>
+      <label for="appname" data-i18n="settings.app.name"></label>
       <input id="appname" type="text" value="" />
     </div>
-    <button id="saveAppName" class="right">Save</button>
+    <button id="saveAppName" class="right" data-i18n="settings.app.save"></button>
   </fieldset>
 
   <div>
+    <h5 data-i18n="settings.about.title"></h5>
     <ul>
-      <li>Temperatures used in this app comes from <a href="http://temperatur.nu">temperatur.nu</a></li>
-      <li>It is only possible to create one device that fetches data from API every five minutes. This might change in the future.</li>
-      <li>The app name is generated when the app is run for the first time, but can be changed by the user. <u>This cannot be empty.</u></li>
+      <li data-i18n="settings.about.li1"></a></li>
+      <li data-i18n="settings.about.li2"></li>
+      <li data-i18n="settings.about.li3"></li>
     </ul>
   </div>
 
