@@ -1,14 +1,16 @@
 {
   "id": "se.fredrikjohnsson.temperaturnu",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "brandColor": "#FFAA00",
   "name": {
-    "en": "temperatur.nu"
+    "en": "temperatur.nu",
+    "sv": "temperatur.nu"
   },
   "description": {
-    "en": "Adds support for temperatures from temperatur.nu"
+    "en": "Adds support for temperatures from temperatur.nu",
+    "sv": "Lägger till stöd för temperaturer från temperatur.nu"
   },
   "category": [
     "climate"
@@ -26,7 +28,8 @@
     {
       "id": "temperature",
       "name": {
-        "en": "Temperature"
+        "en": "Temperature",
+        "sv": "Temperatur"
       },
       "class": "sensor",
       "capabilities": ["measure_temperature"],
@@ -48,19 +51,40 @@
       "settings": [{
         "type": "group",
         "label": {
-          "en": "Device settings"
+          "en": "Device settings",
+          "sv": "Enhetsinställningar"
         },
         "children": [{
           "id": "stationid",
           "type": "text",
           "label": {
-            "en": "Station ID"
+            "en": "Station ID",
+            "sv": "Stations-ID"
           },
           "hint": {
-            "en": "Go to temperatur.nu and search for your station. Station ID is the last part of the URL without '.html'. For example, the station ID for URL https://temperatur.nu/evenas.html is 'evenas'."
+            "en": "Go to temperatur.nu and search for your station. Station ID is the last part of the URL without '.html'. For example, the station ID for URL https://temperatur.nu/evenas.html is 'evenas'.",
+            "sv": "Gå till temperatur.nu och sök efter din station. Stations-ID är den sista delena av URLen utan '.html'. Exempel, stations ID för URLen https://temperatur.nu/evenas.html är 'evenas'."
           }
         }]
       }]
     }
-  ]
+  ],
+  "flow": {
+    "triggers": [
+      {
+        "id": "temperature_updated",
+        "title": {
+          "en": "The temperature is updated",
+          "sv": "Temperaturen är uppdaterad"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "temperature_device",
+            "filter": "driver_id=temperature"
+          }
+        ]
+      }
+    ]
+  }
 }

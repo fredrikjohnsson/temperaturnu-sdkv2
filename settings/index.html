@@ -1,47 +1,57 @@
 <!doctype html>
-<html">
-    <head>
-        <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
-    </head>
-    <style>
-        .image {
-            width: 100%;
-            height: auto;
-        }
-    </style>
+<html>
+  <head>
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  </head>
+  <style>
+    .image {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+
 <body>
-    <img src="assets/temperaturnu.gif" alt="temperatur.nu" class="image"/>
-    <fieldset>
-        <legend>temperatur.nu app settings</legend>
-        <div class="field_row">
-            <label for="appname">App name</label>
-            <input id="appname" type="text" value="" />
-        </div>
-        <button id="saveAppName" class="right">Save</button>
-    </fieldset>
-    
-    <script type="text/javascript">
-        function onHomeyReady(Homey){            
-            Homey.ready();
+  <img src="assets/temperaturnu.gif" alt="temperatur.nu" class="image"/>
+  <fieldset>
+    <legend data-i18n="settings.title"></legend>
+    <div class="field_row">
+      <label for="appname" data-i18n="settings.app.name"></label>
+      <input id="appname" type="text" value="" />
+    </div>
+    <button id="saveAppName" class="right" data-i18n="settings.app.save"></button>
+  </fieldset>
 
-            // Declare page elements
-            var appnameElement = document.getElementById('appname');
-            var saveAppNameElement = document.getElementById('saveAppName');
+  <div>
+    <h5 data-i18n="settings.about.title"></h5>
+    <ul>
+      <li data-i18n="settings.about.li1"></a></li>
+      <li data-i18n="settings.about.li2"></li>
+      <li data-i18n="settings.about.li3"></li>
+    </ul>
+  </div>
 
-            // Get saved values and fill inputs
-            Homey.get('appname', function(err, appname) {
-                if (err) return Homey.alert(err);
-                appnameElement.value = appname;
-            });
+  <script type="text/javascript">
+    function onHomeyReady(Homey){
+      Homey.ready();
 
-            // Listen for button clicks
-            saveAppNameElement.addEventListener('click', function(e) {
-                Homey.set('appname', appnameElement.value, function(err) {
-                    if (err) return Homey.alert(err);
-                });
-            });
-        }
-    </script>
+      // Declare page elements
+      var appnameElement = document.getElementById('appname');
+      var saveAppNameElement = document.getElementById('saveAppName');
+
+      // Get saved values and fill inputs
+      Homey.get('appname', function(err, appname) {
+        if (err) return Homey.alert(err);
+        appnameElement.value = appname;
+      });
+
+      // Listen for button clicks
+      saveAppNameElement.addEventListener('click', function(e) {
+        Homey.set('appname', appnameElement.value, function(err) {
+          if (err) return Homey.alert(err);
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>

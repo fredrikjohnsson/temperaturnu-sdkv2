@@ -5,10 +5,12 @@ const Homey = require('homey');
 let devices = [];
 
 class TemperatureDriver extends Homey.Driver {
-	
+
 	onInit() {
 		this.log('TemperatureDriver has been inited');
 		devices = this.getDevices();
+
+		this.temperatureUpdatedTrigger = new Homey.FlowCardTriggerDevice('temperature_updated').register();
 	}
 
 	onPair(socket) {
@@ -16,7 +18,7 @@ class TemperatureDriver extends Homey.Driver {
 		const t = this;
 
 		let myData;
-		
+
 		socket.on('log', function(msg, callback) {
 			t.log('[onPair] [log] ' + msg);
 		});
@@ -40,7 +42,7 @@ class TemperatureDriver extends Homey.Driver {
 			}
 		});
 	}
-	
+
 }
 
 module.exports = TemperatureDriver;

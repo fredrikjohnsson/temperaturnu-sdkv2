@@ -1,48 +1,41 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 301.605 301.605" style="enable-background:new 0 0 301.605 301.605;" xml:space="preserve">
-<g>
-	<path d="M236.896,38.375v12.854h-49.808V38.375H236.896z M216.009,66.389h-28.921v12.854h28.921V66.389z M187.088,107.257h49.808
-		V94.404h-49.808V107.257z M216.009,122.425h-28.921v12.854h28.921V122.425z M187.088,163.293h49.808v-12.854h-49.808V163.293z
-		 M194.852,236.533c0,35.881-29.191,65.072-65.072,65.072s-65.072-29.191-65.072-65.072c0-23.252,12.211-44.384,32.134-56.074
-		V32.938C96.843,14.775,111.618,0,129.78,0s32.938,14.775,32.938,32.938v147.522C182.641,192.137,194.852,213.275,194.852,236.533z
-		 M181.998,236.533c0-19.73-10.964-37.565-28.619-46.53l-3.515-1.787V32.944c0-11.08-9.01-20.084-20.084-20.084
-		c-11.073,0-20.084,9.004-20.084,20.084v155.272l-3.515,1.787c-17.655,8.972-28.619,26.806-28.619,46.53
-		c0,28.792,23.426,52.218,52.218,52.218S181.998,265.325,181.998,236.533z M171.291,236.533c0,22.886-18.619,41.505-41.511,41.505
-		c-22.886,0-41.505-18.619-41.505-41.505c0-18.76,12.674-35.232,30.823-40.058l2.384-0.636v-79.275h16.601v79.269l2.384,0.643
-		C158.624,201.301,171.291,217.78,171.291,236.533z M131.837,208.866c-0.99-4.396-5.411-7.288-9.917-6.26
-		c-15.733,3.56-26.723,17.32-26.723,33.465c0,4.569,3.721,8.291,8.291,8.291s8.291-3.721,8.291-8.291
-		c0-8.207,5.797-15.482,13.798-17.288C130.024,217.76,132.839,213.313,131.837,208.866z"/>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="170px" height="458px" viewBox="0 0 170 458" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <path d="M127,45.6527592 L127,302.165272 L127,304.845251 L129.231751,306.32902 C151.404051,321.070171 165,345.876565 165,373 C165,417.18278 129.18278,453 85,453 C40.81722,453 5,417.18278 5,373 C5,345.876565 18.5959491,321.070171 40.7682488,306.32902 L43,304.845251 L43,302.165272 L43,45.6527592 L43.0843097,44.3143359 C44.4725787,22.2754446 62.8030589,5 85,5 C107.196941,5 125.527421,22.2754446 126.91569,44.3143359 L127,45.6527592 Z" id="Combined-Shape" stroke="#000000" stroke-width="10"></path>
+            <path d="M65.5,289.5 L100.5,289.5" id="Line" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,279.5 L80.5,279.5" id="Line-Copy-6" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,269.5 L80.5,269.5" id="Line-Copy-7" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,259.5 L80.5,259.5" id="Line-Copy-8" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,249.5 L80.5,249.5" id="Line-Copy-9" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,229.5 L80.5,229.5" id="Line-Copy-10" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,219.5 L80.5,219.5" id="Line-Copy-11" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,209.5 L80.5,209.5" id="Line-Copy-12" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,199.5 L80.5,199.5" id="Line-Copy-13" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,179.5 L80.5,179.5" id="Line-Copy-14" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,169.5 L80.5,169.5" id="Line-Copy-15" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,159.5 L80.5,159.5" id="Line-Copy-16" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,149.5 L80.5,149.5" id="Line-Copy-17" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,129.5 L80.5,129.5" id="Line-Copy-18" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,119.5 L80.5,119.5" id="Line-Copy-19" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,109.5 L80.5,109.5" id="Line-Copy-20" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,99.5 L80.5,99.5" id="Line-Copy-21" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,79.5 L80.5,79.5" id="Line-Copy-22" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,69.5 L80.5,69.5" id="Line-Copy-23" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,59.5 L80.5,59.5" id="Line-Copy-24" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,49.5 L80.5,49.5" id="Line-Copy-25" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,239.5 L100.5,239.5" id="Line-Copy" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,189.5 L100.5,189.5" id="Line-Copy-2" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,139.5 L100.5,139.5" id="Line-Copy-3" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,89.5 L100.5,89.5" id="Line-Copy-4" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <path d="M65.5,39.5 L100.5,39.5" id="Line-Copy-5" stroke="#000000" stroke-width="5" stroke-linecap="square"></path>
+            <circle id="Oval-3" fill="#000000" cx="85" cy="373" r="60"></circle>
+            <circle id="Oval-4" fill="#FFFFFF" cx="114" cy="376" r="13"></circle>
+            <rect id="Rectangle-3" fill="#000000" x="63" y="146" width="44" height="171"></rect>
+        </g>
+    </g>
 </svg>

@@ -1,6 +1,16 @@
 {
     "settings": {
-        "title": "temperature.nu settings",
-        "subtitle": "Use an app name for unsigned calls to temperatur.nu API. Number of unsigned calls is limited to 20 per hour."
+        "title": "temperatur.nu settings",
+        "subtitle": "Use an app name for unsigned calls to temperatur.nu API. Number of unsigned calls is limited to 20 per hour.",
+        "app": {
+          "name": "App name",
+          "save": "Save"
+        },
+        "about": {
+          "title": "About this app",
+          "li1": "Temperatures used in this app comes from <a href='http://temperatur.nu'>temperatur.nu",
+          "li2": "It is only possible to create one device that fetches data from API every five minutes. This might change in the future.",
+          "li3": "The app name is generated when the app is run for the first time, but can be changed by the user. <u>This cannot be empty.</u>"
+        }
     }
 }
