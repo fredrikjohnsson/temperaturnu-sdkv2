@@ -61,6 +61,7 @@
             "en": "Station ID",
             "sv": "Stations-ID"
           },
+          "value":"",
           "hint": {
             "en": "Go to temperatur.nu and search for your station. Station ID is the last part of the URL without '.html'. For example, the station ID for URL https://temperatur.nu/evenas.html is 'evenas'.",
             "sv": "Gå till temperatur.nu och sök efter din station. Stations-ID är den sista delena av URLen utan '.html'. Exempel, stations ID för URLen https://temperatur.nu/evenas.html är 'evenas'."
