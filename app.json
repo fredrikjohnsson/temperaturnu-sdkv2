@@ -1,6 +1,6 @@
 {
   "id": "se.fredrikjohnsson.temperaturnu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "brandColor": "#FFAA00",
@@ -23,6 +23,11 @@
   "author": {
     "name": "Fredrik Johnsson",
     "email": "contact@fredrikjohnsson.se"
+  },
+  "contributors": {
+    "developers": {
+      "name": "Johan Bendz"
+    }
   },
   "drivers": [
     {
