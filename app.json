@@ -25,9 +25,12 @@
     "email": "contact@fredrikjohnsson.se"
   },
   "contributors": {
-    "developers": {
-      "name": "Johan Bendz"
-    }
+    "developers": [
+      {
+        "name": "Johan Bendz",
+        "email": ""        
+      }
+    ]
   },
   "drivers": [
     {
