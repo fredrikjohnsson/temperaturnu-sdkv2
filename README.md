@@ -13,13 +13,18 @@ After a temperature device is created, go to app settings and then Advanced sett
 At the moment there are two triggers available, *The temperature has changed* and *The temperature is updated*. The difference is that the first one only runs when the temperature value is changed, the second one runs every time a value is fetched from API.
 
 ### ToDo
-- [ ] Get temperature from API when station ID is changed
+- [ ] Show timestamp of temperature value, this is available in the API
 
 ### Known issues
-- After entering a station ID for a device, the value returned from API is NaN. After five minutes a good value is returned.
+- None at the moment
 
 ### Changelog
-- **v1.0.0**
+- **v1.0.2 (2019-03-18)**
+  - Station ID no longer needs to be in lowercase
+  - Temperature is now fetched directly when station ID changed
+- **v1.0.1 (2019-03-18)**
+  - 1.5.x compatibility fix
+- **v1.0.0 (2019-03-17)**
   - First public version
 - **v0.0.5**
   - Added app and device icon
