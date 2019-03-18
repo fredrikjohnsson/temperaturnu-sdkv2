@@ -19,6 +19,8 @@ At the moment there are two triggers available, *The temperature has changed* an
 - After entering a station ID for a device, the value returned from API is NaN. After five minutes a good value is returned.
 
 ### Changelog
+- **v1.0.1**
+  - 1.5.x compatibility fix
 - **v1.0.0**
   - First public version
 - **v0.0.5**
