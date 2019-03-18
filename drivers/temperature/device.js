@@ -14,9 +14,13 @@ class TemperatureDevice extends Homey.Device {
 
 		const POLL_INTERVAL = 300000;	// 5 minutes
 
+		// Fetch temperature
 		this.fetchTemperature();
+
+		// Set to fetch temperature at an interval
 		this._fetchTemperature = setInterval(this.fetchTemperature.bind(this), POLL_INTERVAL);
 
+		// Temperature updated trigger
 		this._temperatureUpdatedTrigger = this.getDriver().temperatureUpdatedTrigger;
 	}
 
@@ -29,9 +33,12 @@ class TemperatureDevice extends Homey.Device {
 	}
 
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
+		// Check if stationid settings is changed
 		if (changedKeysArr == 'stationid') {
 			this.log('Settings changed for station ID from ' + oldSettingsObj.stationid + ' to ' + newSettingsObj.stationid) + '. Fetching temperature for new station.';
-			this.fetchTemperature();
+
+			// Trigger a temperature fetch
+			this.fetchTemperature(newSettingsObj.stationid);
 		}
 	}
 
@@ -40,6 +47,9 @@ class TemperatureDevice extends Homey.Device {
 
 		if (appName != null && stationId != null) {
 			this.log('[fetchData] All settings OK');
+
+			stationId = stationId.toLowerCase();
+
 			// Build URL without http://, prepare for md5 hash
 			const url = baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
 
@@ -87,11 +97,25 @@ class TemperatureDevice extends Homey.Device {
 		return await crypto.createHash('md5').update(text).digest('base64');
 	}
 
-	async fetchTemperature() {
+	async fetchTemperature(forcedStationId = '') {
+		// Get app name
 		const appName = Homey.ManagerSettings.get('appname');
-		const stationId = this.getSetting('stationid');
-		const xml = await this.fetchData(stationId, appName);
+
+		// Get station ID
+		let stationId;
+		if (forcedStationId) {
+			stationId = forcedStationId;
+		} else {
+			stationId = this.getSetting('stationid');
+		}
+
+		// Fetch XML with lowercase station ID
+		const xml = await this.fetchData(stationId.toLowerCase(), appName);
+
+		// Extract value from XML
 		const value = await this.xmlValue(xml, 'temp');
+
+		// Save temperature
 		await this.saveTemperature(parseFloat(value));
 	}
 
