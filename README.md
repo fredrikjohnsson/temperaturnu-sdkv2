@@ -16,7 +16,7 @@ At the moment there are two triggers available, *The temperature has changed* an
 
 One action flow card is available called *Report temperature*. Add the card to a flow and fill in your stations hash code and select a temperature token.
 
-## Acknowledgement
+### Acknowledgement
  - Many thanks to [m.nu](http://www.m.nu) for sponsoring the reporting flow card.
 
 ### ToDo
