@@ -34,7 +34,6 @@ class TemperaturnuApp extends Homey.App {
 					t.log('[reportTemperatureAction] Error: ' + err.message);
 				});
 
-				this.log('[reportTemperatureAction] Result is: ' + result);
 		    return Promise.resolve(true);
 		  });
 
