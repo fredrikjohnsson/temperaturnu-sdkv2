@@ -26,6 +26,8 @@ One action flow card is available called *Report temperature*. Add the card to a
 - None at the moment
 
 ### Changelog
+- **v1.1.1 (2019-04-09)**
+  - Bug fixed that make the app crash
 - **v1.1.0 (2019-03-22)**
   - Added an action flow card that reports temperature to temperatur.nu
 - **v1.0.2 (2019-03-18)**
