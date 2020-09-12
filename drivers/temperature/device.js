@@ -50,22 +50,23 @@ class TemperatureDevice extends Homey.Device {
 
 			stationId = stationId.toLowerCase();
 
+			// Make sure station Id is not empty, use default if so
+			if (stationId == ''){
+				stationId = 'hogenorum';
+				this.log('[fetchData] Missing station Id, using default');
+			}
+
 			// Build URL without http://, prepare for md5 hash
 			const url = baseUrl + '?p=' + stationId + '&verbose&cli=' + appName;
 
 			// Create a signed URL with client key
-			const hash = await this.createHash(url + '+' + Homey.env.CLIENT_KEY);
+			const hash = await this.createHash(url);
 			const signedUrl = 'http://' + url + '&sign=' + hash;
 
 			// Make API call
 			let response;
-			if (Homey.env.CLIENT_KEY != '') {
-				this.log('[fetchData] Fetching data using signed URL')
-				response = await fetch(signedUrl);
-			} else {
 				this.log('[fetchData] Fetching data using unsigned URL')
 				response = await fetch('http://' + url);
-			}
 
 			// Take care of not ok responses
 			if (!response.ok) {

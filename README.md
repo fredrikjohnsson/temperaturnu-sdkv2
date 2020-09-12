@@ -26,6 +26,9 @@ One action flow card is available called *Report temperature*. Add the card to a
 - None at the moment
 
 ### Changelog
+- **v1.1.2 (2020-09-12)**
+  - Updated node-fetch to v2.6.1
+  - Code clean-up
 - **v1.1.1 (2019-04-09)**
   - Bug fixed that make the app crash
 - **v1.1.0 (2019-03-22)**
