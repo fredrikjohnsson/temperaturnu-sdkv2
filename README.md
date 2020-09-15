@@ -20,12 +20,14 @@ One action flow card is available called *Report temperature*. Add the card to a
  - Many thanks to [m.nu](http://www.m.nu) for sponsoring the reporting flow card.
 
 ### ToDo
-- [ ] Show timestamp of temperature value, this is available in the API
+- Show timestamp of temperature value, this is available in the API
 
 ### Known issues
 - None at the moment
 
 ### Changelog
+- **v1.1.3 (2020-09-15)**
+  - Updated README
 - **v1.1.2 (2020-09-12)**
   - Updated node-fetch to v2.6.1
   - Code clean-up
