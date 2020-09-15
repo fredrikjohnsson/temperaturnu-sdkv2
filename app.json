@@ -1,6 +1,6 @@
 {
   "id": "se.fredrikjohnsson.temperaturnu",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "brandColor": "#FFAA00",
@@ -40,42 +40,50 @@
         "sv": "Temperatur"
       },
       "class": "sensor",
-      "capabilities": ["measure_temperature"],
+      "capabilities": [
+        "measure_temperature"
+      ],
       "images": {
         "large": "/drivers/temperature/assets/images/large.png",
         "small": "/drivers/temperature/assets/images/small.png"
       },
-      "pair": [{
-        "id": "list_devices",
-        "template": "list_devices",
-        "navigation": {
-          "next": "add_devices"
-        }
-      },
-      {
-        "id": "add_devices",
-        "template": "add_devices"
-      }],
-      "settings": [{
-        "type": "group",
-        "label": {
-          "en": "Device settings",
-          "sv": "Enhetsinställningar"
-        },
-        "children": [{
-          "id": "stationid",
-          "type": "text",
-          "label": {
-            "en": "Station ID",
-            "sv": "Stations-ID"
-          },
-          "value":"",
-          "hint": {
-            "en": "Go to temperatur.nu and search for your station. Station ID is the last part of the URL without '.html'. For example, the station ID for URL https://temperatur.nu/evenas.html is 'evenas'.",
-            "sv": "Gå till temperatur.nu och sök efter din station. Stations-ID är den sista delena av URLen utan '.html'. Exempel, stations ID för URLen https://temperatur.nu/evenas.html är 'evenas'."
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
           }
-        }]
-      }]
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device settings",
+            "sv": "Enhetsinställningar"
+          },
+          "children": [
+            {
+              "id": "stationid",
+              "type": "text",
+              "label": {
+                "en": "Station ID",
+                "sv": "Stations-ID"
+              },
+              "value": "",
+              "hint": {
+                "en": "Go to temperatur.nu and search for your station. Station ID is the last part of the URL without '.html'. For example, the station ID for URL https://temperatur.nu/evenas.html is 'evenas'.",
+                "sv": "Gå till temperatur.nu och sök efter din station. Stations-ID är den sista delena av URLen utan '.html'. Exempel, stations ID för URLen https://temperatur.nu/evenas.html är 'evenas'."
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "flow": {
